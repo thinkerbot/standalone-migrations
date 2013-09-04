@@ -4,10 +4,15 @@ module StandaloneMigrations
       def configure
         Deprecations.new.call
         configurator = Configurator.new
+
         paths = Rails.application.config.paths
         paths.add "config/database", :with => configurator.config
         paths.add "db/migrate", :with => configurator.migrate_dir
         paths.add "db/seeds", :with => configurator.seeds
+
+        ActiveRecord::Tasks::DatabaseTasks.seed_loader = Rails.application
+        ActiveRecord::Tasks::DatabaseTasks.db_dir = Rails.application.config.paths["db"].first
+        ActiveRecord::Tasks::DatabaseTasks.database_configuration = Rails.application.config.database_configuration
       end
 
       def load_tasks

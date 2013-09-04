@@ -6,19 +6,19 @@ module StandaloneMigrations
 
     describe "environment yaml configuration loading" do
 
-      let(:env_hash) do
+      def env_hash
         {
           "development" => { "adapter" => "sqlite3", "database" => "db/development.sql" },
-          "test" => { "adapter" => "sqlite3", "database" => "db/test.sql" },
-          "production" => {"adapter" => "sqlite3", "database" => ":memory:" }
+          "test"        => { "adapter" => "sqlite3", "database" => "db/test.sql" },
+          "production"  => { "adapter" => "sqlite3", "database" => ":memory:" }
         }
       end
 
-      let(:env_hash_other_db) do
+      def env_hash_other_db
         {
           "development" => { "adapter" => "mysql2", "database" => "database_name" },
-          "test" => { "adapter" => "mysql2", "database" => "database_name" },
-          "production" => {"adapter" => "mysql2", "database" => "database_name" }
+          "test"        => { "adapter" => "mysql2", "database" => "database_name" },
+          "production"  => { "adapter" => "mysql2", "database" => "database_name" }
         }
       end
 
@@ -47,9 +47,11 @@ module StandaloneMigrations
       end
 
       context "customizing the environments configuration dynamically" do
-
         let(:configurator) { Configurator.new }
-        let(:new_config) { { 'sbrobous' => 'test' } }
+
+        def new_config
+          { 'sbrobous' => 'test' }
+        end
 
         before(:all) do
           Configurator.environments_config do |env|
