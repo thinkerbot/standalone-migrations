@@ -99,5 +99,5 @@ DEPENDENCIES
   jeweler
   railties (~> 4.0.0.beta1)
   rake
-  rspec (~> 2)
+  rspec (~> 2.14)
   sqlite3

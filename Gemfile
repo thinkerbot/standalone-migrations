@@ -6,6 +6,6 @@ gem 'railties', ENV['AR'] || '~> 4.0.0.beta1'
 
 group :dev do
   gem 'sqlite3'
-  gem 'rspec', '~>2'
+  gem 'rspec', '~>2.14'
   gem 'jeweler'
 end
