@@ -1,5 +1,6 @@
 .bundle
 .idea
+.ruby-version
 schema.rb
 spec/tmp
 pkg
