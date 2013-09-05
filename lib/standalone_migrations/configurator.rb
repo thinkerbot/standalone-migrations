@@ -30,7 +30,8 @@ module StandaloneMigrations
 
     def initialize(options = {})
       defaults = {
-        :config       => "db/config.yml",
+        :config       => ["config/database.yml", "db/config.yml"],
+        :db_dir       => "db",
         :migrate_dir  => "db/migrate",
         :seeds        => "db/seeds.rb",
         :schema       => "db/schema.rb"
@@ -41,6 +42,10 @@ module StandaloneMigrations
 
     def config
       @options[:config]
+    end
+
+    def db_dir
+      @options[:db_dir]
     end
 
     def migrate_dir
@@ -75,7 +80,7 @@ module StandaloneMigrations
 
     def load_from_file(defaults)
       return nil unless File.exists? configuration_file
-      config = YAML.load( IO.read(configuration_file) ) 
+      config = YAML.load( IO.read(configuration_file) )
       {
         :config       => config["config"] ? config["config"]["database"] : defaults[:config],
         :migrate_dir  => config["db"] ? config["db"]["migrate"] : defaults[:migrate_dir],

@@ -9,9 +9,11 @@ module StandaloneMigrations
         paths.add "config/database", :with => configurator.config
         paths.add "db/migrate", :with => configurator.migrate_dir
         paths.add "db/seeds", :with => configurator.seeds
+        paths.add "db", :with => configurator.db_dir
 
-        ActiveRecord::Tasks::DatabaseTasks.seed_loader = Rails.application
-        ActiveRecord::Tasks::DatabaseTasks.db_dir = Rails.application.config.paths["db"].first
+        ActiveRecord::Tasks::DatabaseTasks.seed_loader = paths["db/seeds"].first
+        ActiveRecord::Tasks::DatabaseTasks.db_dir = paths["db"].first
+        ActiveRecord::Tasks::DatabaseTasks.migrations_paths = paths["db/migrate"].first
         ActiveRecord::Tasks::DatabaseTasks.database_configuration = Rails.application.config.database_configuration
       end
 
