@@ -11,6 +11,7 @@ module StandaloneMigrations
         paths.add "db/seeds", :with => configurator.seeds
         paths.add "db", :with => configurator.db_dir
 
+        ActiveRecord::Tasks::DatabaseTasks.env = ENV["RAILS_ENV"]
         ActiveRecord::Tasks::DatabaseTasks.seed_loader = paths["db/seeds"].first
         ActiveRecord::Tasks::DatabaseTasks.db_dir = paths["db"].first
         ActiveRecord::Tasks::DatabaseTasks.migrations_paths = paths["db/migrate"].first
