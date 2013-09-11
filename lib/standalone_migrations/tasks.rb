@@ -12,10 +12,22 @@ module StandaloneMigrations
         paths.add "db", :with => configurator.db_dir
 
         ActiveRecord::Tasks::DatabaseTasks.env = ENV["RAILS_ENV"]
-        ActiveRecord::Tasks::DatabaseTasks.seed_loader = paths["db/seeds"].first
+        ActiveRecord::Tasks::DatabaseTasks.seed_loader = SeedLoader.new(paths["db/seeds"])
         ActiveRecord::Tasks::DatabaseTasks.db_dir = paths["db"].first
         ActiveRecord::Tasks::DatabaseTasks.migrations_paths = paths["db/migrate"]
         ActiveRecord::Tasks::DatabaseTasks.database_configuration = Rails.application.config.database_configuration
+      end
+
+      class SeedLoader
+        attr_reader :paths
+        def initialize(paths)
+          @paths = paths
+        end
+        def load_seed
+          paths.each do |path|
+            load path
+          end
+        end
       end
 
       def load_tasks
