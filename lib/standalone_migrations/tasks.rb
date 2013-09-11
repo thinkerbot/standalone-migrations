@@ -14,7 +14,7 @@ module StandaloneMigrations
         ActiveRecord::Tasks::DatabaseTasks.env = ENV["RAILS_ENV"]
         ActiveRecord::Tasks::DatabaseTasks.seed_loader = paths["db/seeds"].first
         ActiveRecord::Tasks::DatabaseTasks.db_dir = paths["db"].first
-        ActiveRecord::Tasks::DatabaseTasks.migrations_paths = paths["db/migrate"].first
+        ActiveRecord::Tasks::DatabaseTasks.migrations_paths = paths["db/migrate"]
         ActiveRecord::Tasks::DatabaseTasks.database_configuration = Rails.application.config.database_configuration
       end
 
