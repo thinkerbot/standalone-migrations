@@ -30,7 +30,7 @@ module StandaloneMigrations
 
     def initialize(options = {})
       defaults = {
-        :config       => ["config/database.yml", "db/config.yml"],
+        :config       => "config/database.yml",
         :db_dir       => "db",
         :migrate_dir  => "db/migrate",
         :seeds        => "db/seeds.rb",
